@@ -1,0 +1,1 @@
+export { PokeAPILink } from "./PokeAPILink";
