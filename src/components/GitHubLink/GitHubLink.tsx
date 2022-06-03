@@ -6,7 +6,7 @@ import GitHubLogo from "../../assets/github-logo.png";
 export const GitHubLink = () => {
   return (
     <a
-      href="https://github.com/emirkucukosman"
+      href="https://github.com/emirkucukosman/pokemon-app"
       target="_blank"
       rel="noopener noreferrer"
       className="github-link"
