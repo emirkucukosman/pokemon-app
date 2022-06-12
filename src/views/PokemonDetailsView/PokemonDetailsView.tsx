@@ -35,11 +35,11 @@ export const PokemonDetailsView = () => {
 
   return (
     <div className="container">
-      <div className="top-left" onClick={handleBackClicked}>
-        <div className="navigate-back">
+      <div className="top-left">
+        <button className="navigate-back" onClick={handleBackClicked}>
           <span className="material-symbols-outlined">navigate_before</span>
           <span>Back</span>
-        </div>
+        </button>
       </div>
       <div className="center-middle">
         <div className="pokemon-details">
