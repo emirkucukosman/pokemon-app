@@ -4,7 +4,7 @@ import React, { useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 
 // Services
-import { useGetPokemonsQuery } from "src/services/pokemon";
+import { useGetPokemonsQuery, usePrefetch } from "src/services/pokemon";
 import { Pokemon } from "src/services/types";
 
 export const ListPokemonsView = () => {
@@ -13,6 +13,7 @@ export const ListPokemonsView = () => {
 
   // RTK Query
   const { data, error, isLoading } = useGetPokemonsQuery(offset);
+  const prefetchPokemonDetails = usePrefetch("getPokemonByName");
 
   // Infinite scrolling
   const observer = useRef<IntersectionObserver>();
@@ -29,6 +30,10 @@ export const ListPokemonsView = () => {
     },
     [isLoading, data?.next]
   );
+
+  const handleLinkHover = (name: string) => () => {
+    prefetchPokemonDetails(name);
+  };
 
   useEffect(() => {
     if (data?.results) {
@@ -58,7 +63,12 @@ export const ListPokemonsView = () => {
     <div className="container">
       {totalResults
         ? totalResults.map((pokemon, i) => (
-            <Link to={`/${pokemon.name}`} style={{ textDecoration: "none" }} key={i}>
+            <Link
+              to={`/${pokemon.name}`}
+              style={{ textDecoration: "none" }}
+              onMouseOver={handleLinkHover(pokemon.name)}
+              key={i}
+            >
               <div
                 className="pokemon-item"
                 ref={i + 1 === totalResults.length ? lastPokemonItem : undefined}
